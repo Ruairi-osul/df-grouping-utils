@@ -29,7 +29,9 @@ def groupby_two_df(
     for group in groups_shared:
         df1_sub = df1.loc[df1[df1_group_colname] == group]
         df2_sub = df2.loc[df2[df2_group_colname] == group]
-        group_result = f(df1_sub, df2_sub, **kwargs)
+        group_result = f(
+            df1_sub, df2_sub, **kwargs
+        ).copy()  # so not updating the original dataframes
         group_result["group"] = group
         results.append(group_result)
     return pd.concat(results)
