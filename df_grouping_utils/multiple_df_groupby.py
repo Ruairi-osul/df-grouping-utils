@@ -27,8 +27,8 @@ def groupby_two_df(
     groups_shared = groups_df1.intersection(groups_df2)
     results: List[pd.DataFrame] = []
     for group in groups_shared:
-        df1_sub = df1.loc[df1[df1_group_colname] == group]
-        df2_sub = df2.loc[df2[df2_group_colname] == group]
+        df1_sub = df1.loc[df1[df1_group_colname] == group].copy()
+        df2_sub = df2.loc[df2[df2_group_colname] == group].copy()
         group_result = f(df1_sub, df2_sub, **kwargs)
         group_result["group"] = group
         results.append(group_result)
