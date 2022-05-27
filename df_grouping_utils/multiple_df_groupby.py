@@ -22,8 +22,12 @@ def groupby_two_df(
     Returns:
         Union[pd.Series, pd.DataFrame]: The results of the group by
     """
-    groups_df1 = set(df1[df1_group_colname].unique())
-    groups_df2 = set(df2[df2_group_colname].unique())
+    groups_df1 = set(
+        df1[df1_group_colname].unique()
+    ).copy()  # so not updating the original dataframes
+    groups_df2 = set(
+        df2[df2_group_colname].unique()
+    ).copy()  # so not updating the original dataframes
     groups_shared = groups_df1.intersection(groups_df2)
     results: List[pd.DataFrame] = []
     for group in groups_shared:
